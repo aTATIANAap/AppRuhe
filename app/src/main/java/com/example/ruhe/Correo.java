@@ -1,10 +1,6 @@
 package com.example.ruhe;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.os.StrictMode;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -55,14 +51,11 @@ public class Correo extends AppCompatActivity {
                 String url2 = "https://www.google.com/maps?q="+destinoUsuario;
                 String LinkDestino = "<a href=\"" + url2 + "\">" + url2 + "</a>";
                 message.setContent("Hola, somos de la aplicación Ruhe, el envío de este mensaje se debe a que una persona que lo seleccionó a usted como contacto de emergencia, se encuentra en peligro, esta es la ubicación de la persona: \n"+LinkUbicacion+"\nY se dirigía a estas coordenadas: \n"+LinkDestino, "text/html; charset=utf-8");
-
                 Transport.send(message);
             }
         }
         catch(Exception e){
             e.printStackTrace();
         }
-
-        //metodo de enviar ubi al contacto
     }
 }

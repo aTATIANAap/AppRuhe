@@ -1,8 +1,6 @@
 package com.example.ruhe;
 
-import java.io.Serializable;
-
-public class Ruta implements Serializable {
+public class Ruta {
     private String nombreRuta;
     private String origen;
     private String destino;
@@ -43,26 +41,4 @@ public class Ruta implements Serializable {
         return tiempo;
     }
 
-    public void setContacto(String contacto) {
-        this.contacto = contacto;
-    }
-
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
-
-    public void setOrigen(String origen) {
-        this.origen = origen;
-    }
-
-    public void setPregunta(String pregunta) {
-        this.pregunta = pregunta;
-    }
-
-    public void setTiempo(String tiempo) {
-        this.tiempo = tiempo;
-    }
-
-    public void setNombreRuta(String nombreRuta) { this.nombreRuta = nombreRuta;
-    }
 }

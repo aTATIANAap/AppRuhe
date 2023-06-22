@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 
 public class Ingresado extends AppCompatActivity {
 
-    FirebaseAuth auth;
+    private FirebaseAuth auth;
     private ListView listView;
     private static int index;
     private ArrayList<String> rutasMostrar;
@@ -32,10 +30,6 @@ public class Ingresado extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingresado);
         Toast.makeText(Ingresado.this,"Remember your contact to check their mail",Toast.LENGTH_SHORT).show();
-
-        if(!Serial.cargarArchivo()){
-            Serial.guardarArchivo(MainActivity.getRutas());
-        }
 
         auth = FirebaseAuth.getInstance();
         listView = findViewById(R.id.listViewRutas);
@@ -76,8 +70,6 @@ public class Ingresado extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 opcion = editText.getText().toString();
-
-                // Aquí puedes hacer algo con el dato ingresado por el usuario
 
                 // Cerrar el cuadro de diálogo
                 for (Ruta rutaTraida: MainActivity.getRutas()) {

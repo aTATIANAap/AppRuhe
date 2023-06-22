@@ -1,12 +1,9 @@
 package com.example.ruhe;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -61,23 +58,6 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, registrarse.class);
         startActivity(i);
     }
-
-    //ESTO SE VAAAAA
-//    public void irPruebaConAlertaConConfirmacion(View v) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("Confirmation")
-//                .setMessage("There are some options that you can only see\nAre you sure to make this action?")
-//                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // La acción se realiza cuando el usuario presiona "OK"
-//                        Intent i = new Intent(MainActivity.this, enAccion.class);
-//                        startActivity(i);
-//                    }
-//                })
-//                .setNegativeButton("Cancel", null) // No realiza ninguna acción si el usuario presiona "Cancelar"
-//                .show();
-//    }
 
     public static ArrayList<Ruta> getRutas() {
         return rutas;

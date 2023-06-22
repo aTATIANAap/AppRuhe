@@ -6,13 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -20,39 +17,21 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 public class enAccion extends AppCompatActivity implements LocationListener {
-
-
     LocationManager locationManager;
-    String pregunta, ubicacion;
-    TextView cronometro;
-    int tiempo;
-    FirebaseAuth auth;
-
-
+    private String pregunta, ubicacion;
+    private TextView cronometro;
+    private int tiempo;
+    private FirebaseAuth auth;
     private static final int GPS_TIME_INTERVAL = 1000 * 60 * 5; // get gps location every 1 min
     private static final int GPS_DISTANCE = 1000; // set the distance value in meter
     CountDownTimer countDownTimer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,5 +147,9 @@ public class enAccion extends AppCompatActivity implements LocationListener {
     public void emergencia(View view){
         requestLocation();
         Toast.makeText(this,"Got it",Toast.LENGTH_SHORT).show();
+    }
+
+    public void salir(View view){
+        finishAffinity();
     }
 }

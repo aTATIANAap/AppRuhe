@@ -28,6 +28,7 @@
     <string name="hint_pregunta">Question</string>
 
     <string name="btn_emergencia">EMERGENCY</string>
+    <string name="btn_salir">I have arrived</string>
 
 
 </resources>

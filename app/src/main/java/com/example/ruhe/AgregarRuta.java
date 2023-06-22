@@ -24,18 +24,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 
-import java.io.*;
-import java.util.ArrayList;
-
-public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener, Serializable {
-
-    FirebaseAuth auth;
+public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener{
     GoogleMap mMap;
     private EditText textNombre, textDest, textTiempo, textPregunta, textContacto;
     LatLng usuario;
-    String userUbi;
+    private String userUbi;
 
 
     @Override
@@ -99,8 +93,6 @@ public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback
 
         int permissionCheck = ContextCompat.checkSelfPermission(AgregarRuta.this, ACCESS_FINE_LOCATION);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,locationListener);
-
-
     }
     public void crearRuta(Ruta ruta) {
         MainActivity.añadirRuta(ruta);

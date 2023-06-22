@@ -42,19 +42,14 @@ public class iniciarSesion extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(getApplicationContext(),"Authentication succeed", Toast.LENGTH_SHORT).show();
-
-                                //Log.d(TAG, "createUserWithEmailAndPassword:success"); se puede omitir
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                //updateUI(user); no es necesario
 
                                 Intent i = new Intent(getApplicationContext(),Ingresado.class);
                                 startActivity(i);
 
                             } else {
                                 // If sign in fails, display a message to the user.
-                                //Log.w(TAG, "createUserWithEmailAndPassword:failure", task.getException()); no es necesario
                                 Toast.makeText(getApplicationContext(),"Authentication failed.", Toast.LENGTH_SHORT).show();
-                                //updateUI(null); se puede omitir
                             }
                         }
                     });
