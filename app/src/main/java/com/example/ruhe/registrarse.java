@@ -2,6 +2,7 @@ package com.example.ruhe;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,11 +33,12 @@ public class registrarse extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        correo =findViewById(R.id.correo);
-        contrasena =findViewById(R.id.contrasena);
-        contrasenaConfirmacion =findViewById(R.id.contrasenaConfir);
+        correo = findViewById(R.id.correo);
+        contrasena = findViewById(R.id.contrasena);
+        contrasenaConfirmacion = findViewById(R.id.contrasenaConfir);
 
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -44,27 +46,26 @@ public class registrarse extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
-    public void registrarUsuario(View view){
+    public void registrarUsuario(View view) {
 
-        if (contrasena.getText().toString().equals(contrasenaConfirmacion.getText().toString())){
-            mAuth.createUserWithEmailAndPassword(correo.getText().toString().trim(),contrasena.getText().toString())
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(getApplicationContext(),"Welcome to the app that helps you to get safe home.", Toast.LENGTH_SHORT).show();
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Intent i = new Intent(getApplicationContext(),MainActivity.class);
-                                startActivity(i);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(getApplicationContext(),"Authentication failed.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        }else{
-            Toast.makeText(this,"Passwords don´t match.",Toast.LENGTH_SHORT).show();
+        if (contrasena.getText().toString().equals(contrasenaConfirmacion.getText().toString())) {
+            mAuth.createUserWithEmailAndPassword(correo.getText().toString().trim(), contrasena.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Toast.makeText(getApplicationContext(), "Welcome to the app that helps you to get safe home.", Toast.LENGTH_SHORT).show();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(i);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            Toast.makeText(this, "Passwords don´t match.", Toast.LENGTH_SHORT).show();
         }
     }
 }

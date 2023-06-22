@@ -34,7 +34,8 @@ public class Ruta {
         return contacto;
     }
 
-    public String getNombreRuta() { return nombreRuta;
+    public String getNombreRuta() {
+        return nombreRuta;
     }
 
     public String getTiempo() {

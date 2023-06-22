@@ -20,7 +20,9 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 public class enAccion extends AppCompatActivity implements LocationListener {
@@ -36,21 +38,21 @@ public class enAccion extends AppCompatActivity implements LocationListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        ArrayList<Ruta> rutas= new ArrayList<>(MainActivity.getRutas());
+        ArrayList<Ruta> rutas = new ArrayList<>(MainActivity.getRutas());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_en_accion);
         auth = FirebaseAuth.getInstance();
         cronometro = findViewById(R.id.cronometro);
 
-        if (auth.getCurrentUser()!=null){
-            pregunta=rutas.get(Ingresado.getIndex()).getPregunta();
-            tiempo=Integer.parseInt(rutas.get(Ingresado.getIndex()).getTiempo());
-            cronometro(tiempo,pregunta);
-        }else{
-            tiempo=20;
-            pregunta="Are you okay?";
-            cronometro(tiempo,pregunta);
+        if (auth.getCurrentUser() != null) {
+            pregunta = rutas.get(Ingresado.getIndex()).getPregunta();
+            tiempo = Integer.parseInt(rutas.get(Ingresado.getIndex()).getTiempo());
+            cronometro(tiempo, pregunta);
+        } else {
+            tiempo = 20;
+            pregunta = "Are you okay?";
+            cronometro(tiempo, pregunta);
         }
 
     }
@@ -60,8 +62,8 @@ public class enAccion extends AppCompatActivity implements LocationListener {
     public void onLocationChanged(@NonNull Location location) {
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        ubicacion=location.getLatitude()+","+location.getLongitude();
-        Toast.makeText(this,"Got Location.",Toast.LENGTH_SHORT).show();
+        ubicacion = location.getLatitude() + "," + location.getLongitude();
+        Toast.makeText(this, "Got Location.", Toast.LENGTH_SHORT).show();
         Correo.enviarCorreo(ubicacion);
         Intent i = new Intent(enAccion.this, Ingresado.class);
         startActivity(i);
@@ -71,17 +73,18 @@ public class enAccion extends AppCompatActivity implements LocationListener {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             //request location Now
             requestLocation();
         }
     }
+
     //codigo para pedir la location
     private void requestLocation() {
-        if(locationManager == null){
+        if (locationManager == null) {
             locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         }
-        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                     ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -89,7 +92,8 @@ public class enAccion extends AppCompatActivity implements LocationListener {
             }
         }
     }
-    private void preguntar(String pregunta){
+
+    private void preguntar(String pregunta) {
         // Crear el AlertDialog
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle("Confirmation")
@@ -100,7 +104,7 @@ public class enAccion extends AppCompatActivity implements LocationListener {
                         cronometro(tiempo, pregunta);
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener(){
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         requestLocation();
@@ -124,8 +128,8 @@ public class enAccion extends AppCompatActivity implements LocationListener {
         }, 20000); // Tiempo en milisegundos (20 segundos en este ejemplo)
     }
 
-    public void cronometro(int tiempo,String pregunta){
-        countDownTimer = new CountDownTimer(tiempo*1000, 1000) {
+    public void cronometro(int tiempo, String pregunta) {
+        countDownTimer = new CountDownTimer(tiempo * 1000, 1000) {
             // milisegundos, intervalo de 1000 milisegundos (1 segundo)
 
             public void onTick(long millisUntilFinished) {
@@ -144,12 +148,12 @@ public class enAccion extends AppCompatActivity implements LocationListener {
         countDownTimer.start(); // Iniciar el cronómetro
     }
 
-    public void emergencia(View view){
+    public void emergencia(View view) {
         requestLocation();
-        Toast.makeText(this,"Got it",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Got it", Toast.LENGTH_SHORT).show();
     }
 
-    public void salir(View view){
+    public void salir(View view) {
         finishAffinity();
     }
 }

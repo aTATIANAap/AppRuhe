@@ -25,7 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener{
+public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
     GoogleMap mMap;
     private EditText textNombre, textDest, textTiempo, textPregunta, textContacto;
     LatLng usuario;
@@ -46,6 +46,8 @@ public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        textDest.setEnabled(false);
+
     }
 
 
@@ -63,14 +65,14 @@ public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(destino).title("Destination"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(destino));
 
-        textDest.setText(String.valueOf(latLng.latitude+" "+latLng.longitude));
+        textDest.setText(String.valueOf(latLng.latitude + " " + latLng.longitude));
 
     }
 
     //Metodo abrir mapa
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        Toast.makeText(this,"Use the icon on the right side of the map to center.",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Use the icon on the right side of the map to center.", Toast.LENGTH_SHORT).show();
         mMap = googleMap;
         this.mMap.setOnMapClickListener(this);
         this.mMap.setOnMapLongClickListener(this);
@@ -79,38 +81,46 @@ public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback
         }
         mMap.setMyLocationEnabled(true);
 
-        LocationManager locationManager = (LocationManager) AgregarRuta.this.getSystemService (Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) AgregarRuta.this.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(@NonNull Location location) {
                 usuario = new LatLng(location.getLatitude(), location.getLongitude());
                 //textUbi.setText(String.valueOf(usuario.latitude+" "+usuario.longitude));
-                userUbi = String.valueOf(usuario.latitude+" "+usuario.longitude);
+                userUbi = String.valueOf(usuario.latitude + " " + usuario.longitude);
             }
-            public void onStatusChanges(String provider, int status, Bundle extras){}
-            public void onProviderEnabled(String provider){}
-            public void onProviderDisabled(String provider){}
+
+            public void onStatusChanges(String provider, int status, Bundle extras) {
+            }
+
+            public void onProviderEnabled(String provider) {
+            }
+
+            public void onProviderDisabled(String provider) {
+            }
         };
 
         int permissionCheck = ContextCompat.checkSelfPermission(AgregarRuta.this, ACCESS_FINE_LOCATION);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     }
+
     public void crearRuta(Ruta ruta) {
         MainActivity.añadirRuta(ruta);
-        Toast.makeText(this,"Route added",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Route added", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, Ingresado.class);
         startActivity(i);
 
     }
-    public void agregarRuta(View view){
+
+    public void agregarRuta(View view) {
         String nombreRuta = String.valueOf(textNombre.getText());
         String destino = String.valueOf(textDest.getText());
         String contacto = (String.valueOf(textContacto.getText()));
         String pregunta = String.valueOf(textPregunta.getText());
-        String  tiempo = String.valueOf(textTiempo.getText());
-        if (nombreRuta.equals("") || destino.equals("") || pregunta.equals("")|| contacto.equals("") || tiempo.equals("")) {
-            Toast.makeText(this,"Fill all the empty spaces",Toast.LENGTH_SHORT).show();
+        String tiempo = String.valueOf(textTiempo.getText());
+        if (nombreRuta.equals("") || destino.equals("") || pregunta.equals("") || contacto.equals("") || tiempo.equals("")) {
+            Toast.makeText(this, "Fill all the empty spaces", Toast.LENGTH_SHORT).show();
         } else {
-            Ruta datosUsuario = new Ruta(nombreRuta, userUbi, destino, pregunta,tiempo,contacto);
+            Ruta datosUsuario = new Ruta(nombreRuta, userUbi, destino, pregunta, tiempo, contacto);
             crearRuta(datosUsuario);
         }
     }

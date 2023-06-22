@@ -17,7 +17,7 @@
     <string name="btn_Registro">Register</string>
 
     <string name="destino">Your destination</string>
-    <string name="hint_direccion">Destination</string>
+    <string name="hint_direccion">Coordinates</string>
     <string name="hint_nombre">Place</string>
     <string name="ruta">Place name</string>
     <string name="contacto">Contact Email</string>
