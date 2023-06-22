@@ -1,33 +1,33 @@
 <resources>
     <string name="app_name">Ruhe</string>
 
-    <string name="btn_inicio">Iniciar Sesión</string>
-    <string name="btn_registro">Registrarse</string>
-    <string name="btn_prueba">Probar</string>
+    <string name="btn_inicio">Login</string>
+    <string name="btn_registro">Register</string>
+    <string name="btn_prueba">Try</string>
 
     <string name="bienvenida">Welcome</string>
-    <string name="btn_escoger">Escoger ruta</string>
-    <string name="btn_agregar">Agregar ruta</string>
-    <string name="btn_cerrar">Cerrar sesión</string>
+    <string name="btn_escoger">Choose route</string>
+    <string name="btn_agregar">Add route</string>
+    <string name="btn_cerrar">Sign out</string>
 
-    <string name="hint_correo">Ingrese su correo</string>
-    <string name="hint_contrasena">Ingrese su contraseña</string>
-    <string name="hint_contrasena2">Confirme su contraseña</string>
-    <string name="btn_IniciarSesion">Iniciar Sesión</string>
-    <string name="btn_Registro">Registrarse</string>
+    <string name="hint_correo">Enter your email</string>
+    <string name="hint_contrasena">Enter password</string>
+    <string name="hint_contrasena2">Confirm password</string>
+    <string name="btn_IniciarSesion">Login</string>
+    <string name="btn_Registro">Register</string>
 
-    <string name="destino">Dirección del destino</string>
-    <string name="hint_direccion">Dirección</string>
-    <string name="hint_nombre">Nombre</string>
-    <string name="ruta">Nombre ruta</string>
-    <string name="contacto">Correo de su contacto</string>
-    <string name="hint_contacto">Correo</string>
-    <string name="tiempo">Tiempo entre preguntas</string>
-    <string name="hint_tiempo">Tiempo (seg) </string>
-    <string name="pregunta">Pregunta personalizada</string>
-    <string name="hint_pregunta">Pregunta</string>
+    <string name="destino">Your destination</string>
+    <string name="hint_direccion">Destination</string>
+    <string name="hint_nombre">Place</string>
+    <string name="ruta">Place name</string>
+    <string name="contacto">Contact Email</string>
+    <string name="hint_contacto">Email</string>
+    <string name="tiempo">Question Timer</string>
+    <string name="hint_tiempo">Time (sec) </string>
+    <string name="pregunta">Custom question</string>
+    <string name="hint_pregunta">Question</string>
 
-    <string name="btn_emergencia">EMERGENCIA</string>
+    <string name="btn_emergencia">EMERGENCY</string>
 
 
 </resources>
