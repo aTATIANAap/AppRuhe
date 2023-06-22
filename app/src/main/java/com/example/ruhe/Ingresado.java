@@ -22,7 +22,7 @@ public class Ingresado extends AppCompatActivity {
 
     FirebaseAuth auth;
     private ListView listView;
-    private int index;
+    private static int index;
     private ArrayList<String> rutasMostrar;
     private String opcion, encontrada;
 
@@ -83,13 +83,9 @@ public class Ingresado extends AppCompatActivity {
                 for (Ruta rutaTraida: MainActivity.getRutas()) {
                     if (rutaTraida.getNombreRuta().equals(opcion)){
                         // Guardar el valor ingresado en SharedPreferences
-                        SharedPreferences preferences = getSharedPreferences("MyPrefs", Ingresado.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences.edit();
                         index=MainActivity.getRutas().indexOf(rutaTraida);
-                        editor.putInt("RutaIndex", index);
                         dialog.dismiss();
                         encontrada="We found your route";
-                        editor.apply();
                         Intent i = new Intent(Ingresado.this, enAccion.class);
                         startActivity(i);
                 }else{
@@ -111,5 +107,9 @@ public class Ingresado extends AppCompatActivity {
         // Mostrar el cuadro de diálogo
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public static int getIndex() {
+        return index;
     }
 }

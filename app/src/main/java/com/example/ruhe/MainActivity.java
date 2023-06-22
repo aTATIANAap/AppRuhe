@@ -63,21 +63,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //ESTO SE VAAAAA
-    public void irPruebaConAlertaConConfirmacion(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirmation")
-                .setMessage("There are some options that you can only see\nAre you sure to make this action?")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // La acción se realiza cuando el usuario presiona "OK"
-                        Intent i = new Intent(MainActivity.this, enAccion.class);
-                        startActivity(i);
-                    }
-                })
-                .setNegativeButton("Cancel", null) // No realiza ninguna acción si el usuario presiona "Cancelar"
-                .show();
-    }
+//    public void irPruebaConAlertaConConfirmacion(View v) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Confirmation")
+//                .setMessage("There are some options that you can only see\nAre you sure to make this action?")
+//                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // La acción se realiza cuando el usuario presiona "OK"
+//                        Intent i = new Intent(MainActivity.this, enAccion.class);
+//                        startActivity(i);
+//                    }
+//                })
+//                .setNegativeButton("Cancel", null) // No realiza ninguna acción si el usuario presiona "Cancelar"
+//                .show();
+//    }
 
     public static ArrayList<Ruta> getRutas() {
         return rutas;

@@ -57,9 +57,6 @@ public class enAccion extends AppCompatActivity implements LocationListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        // Obtener el valor ingresado desde SharedPreferences
-        SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        int index = preferences.getInt("RutaIndex",0);
         ArrayList<Ruta> rutas= new ArrayList<>(MainActivity.getRutas());
 
         super.onCreate(savedInstanceState);
@@ -68,8 +65,8 @@ public class enAccion extends AppCompatActivity implements LocationListener {
         cronometro = findViewById(R.id.cronometro);
 
         if (auth.getCurrentUser()!=null){
-            pregunta=rutas.get(index).getPregunta();
-            tiempo=Integer.parseInt(rutas.get(index).getTiempo());
+            pregunta=rutas.get(Ingresado.getIndex()).getPregunta();
+            tiempo=Integer.parseInt(rutas.get(Ingresado.getIndex()).getTiempo());
             cronometro(tiempo,pregunta);
         }else{
             tiempo=20;

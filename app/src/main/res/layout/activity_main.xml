@@ -51,11 +51,11 @@
             android:layout_width="match_parent"
             android:layout_height="100dp" />
 
-        <Button
-            android:id="@+id/prueba"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="irPruebaConAlertaConConfirmacion"
-            android:text="@string/btn_prueba" />
+<!--        <Button-->
+<!--            android:id="@+id/prueba"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:onClick="irPruebaConAlertaConConfirmacion"-->
+<!--            android:text="@string/btn_prueba" />-->
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
