@@ -19,6 +19,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -70,7 +71,6 @@ public class enAccion extends AppCompatActivity implements LocationListener {
             pregunta=rutas.get(index).getPregunta();
             tiempo=Integer.parseInt(rutas.get(index).getTiempo());
             cronometro(tiempo,pregunta);
-
         }else{
             tiempo=20;
             pregunta="Are you okay?";
@@ -84,7 +84,7 @@ public class enAccion extends AppCompatActivity implements LocationListener {
     public void onLocationChanged(@NonNull Location location) {
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        ubicacion="Got Location: "+location.getLatitude()+", "+location.getLongitude();
+        ubicacion=location.getLatitude()+","+location.getLongitude();
         Toast.makeText(this,"Got Location.",Toast.LENGTH_SHORT).show();
         Correo.enviarCorreo(ubicacion);
         Intent i = new Intent(enAccion.this, Ingresado.class);
@@ -114,8 +114,9 @@ public class enAccion extends AppCompatActivity implements LocationListener {
         }
     }
     private void preguntar(String pregunta){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirmation")
+        // Crear el AlertDialog
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("Confirmation")
                 .setMessage(pregunta)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -129,7 +130,22 @@ public class enAccion extends AppCompatActivity implements LocationListener {
                         requestLocation();
                     }
                 })
-                .show();
+                .create();
+
+        // Mostrar el AlertDialog
+        alertDialog.show();
+
+        // Cerrar el AlertDialog después de un tiempo determinado (ejemplo: 3 segundos)
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (alertDialog.isShowing()) {
+                    alertDialog.dismiss();
+                    requestLocation();
+                }
+            }
+        }, 20000); // Tiempo en milisegundos (20 segundos en este ejemplo)
     }
 
     public void cronometro(int tiempo,String pregunta){

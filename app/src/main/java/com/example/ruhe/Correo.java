@@ -43,7 +43,7 @@ public class Correo {
                 message.setFrom(new InternetAddress(correo));
                 message.setSubject("EMERGENCIA: SU CONTACTO NO RESPONDE");
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("david-felipe-2000@hotmail.com"));
-                message.setContent("Hola, somos de la aplicación Ruhe, el envío de este mensaje se debe a que una persona que lo seleccionó a usted com contacto de emergencia, se encuentra en peligro, esta es la ubicación de la persona: \n"+ubicacion, "text/html; charset=utf-8");
+                message.setContent("Hola, somos de la aplicación Ruhe, el envío de este mensaje se debe a que una persona que lo seleccionó a usted com contacto de emergencia, se encuentra en peligro, esta es la ubicación de la persona: \nhttps://www.google.com/maps?q="+ubicacion, "text/html; charset=utf-8");
 
                 Transport.send(message);
             }
