@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "171849517205",
+    "project_id": "ruhe-79d42",
+    "storage_bucket": "ruhe-79d42.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171849517205:android:fdf324a3fada9b9e13f39c",
+        "android_client_info": {
+          "package_name": "com.example.ruhe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171849517205-2um9qrr80t971do4jc2t1s4felnsefgk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWqTugeBdwm3PeE_2jWCmNqO4a--vTnxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171849517205-2um9qrr80t971do4jc2t1s4felnsefgk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
