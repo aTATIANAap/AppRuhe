@@ -1,13 +1,18 @@
 package com.example.ruhe;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -35,14 +40,11 @@ import javax.mail.internet.MimeMessage;
 
 public class enAccion extends AppCompatActivity implements LocationListener {
 
-    Session session;
-    String correo = "ruheaplicacion@gmail.com";
-    String contra = "gbqdomxhuovibywj";
+
     LocationManager locationManager;
-    ArrayList<Ruta> rutas;
-    String pregunta, opcion, ubicacion;
+    String pregunta, ubicacion;
     TextView cronometro;
-    int tiempo, ruta=1;
+    int tiempo;
     FirebaseAuth auth;
 
 
@@ -53,25 +55,25 @@ public class enAccion extends AppCompatActivity implements LocationListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Ingresado ingresado = new Ingresado();
-        opcion = ingresado.getOpcion();
 
-        MainActivity principal = new MainActivity();
-        rutas = new ArrayList<>();
-        rutas = principal.getRutas();
+        // Obtener el valor ingresado desde SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        int index = preferences.getInt("RutaIndex",0);
+        ArrayList<Ruta> rutas= new ArrayList<>(MainActivity.getRutas());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_en_accion);
         auth = FirebaseAuth.getInstance();
         cronometro = findViewById(R.id.cronometro);
 
         if (auth.getCurrentUser()!=null){
-            pregunta=rutas.get(ruta).getPregunta();
-            tiempo=Integer.parseInt(rutas.get(ruta).getTiempo());
+            pregunta=rutas.get(index).getPregunta();
+            tiempo=Integer.parseInt(rutas.get(index).getTiempo());
             cronometro(tiempo,pregunta);
 
         }else{
             tiempo=20;
-            pregunta="Estás bien?";
+            pregunta="Are you okay?";
             cronometro(tiempo,pregunta);
         }
 
@@ -80,7 +82,13 @@ public class enAccion extends AppCompatActivity implements LocationListener {
     //codigo que se llamara cada que se reciba el location update
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        Toast.makeText(this,"Got Location",Toast.LENGTH_SHORT).show();
+
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        ubicacion="Got Location: "+location.getLatitude()+", "+location.getLongitude();
+        Toast.makeText(this,"Got Location.",Toast.LENGTH_SHORT).show();
+        Correo.enviarCorreo(ubicacion);
+        Intent i = new Intent(enAccion.this, Ingresado.class);
+        startActivity(i);
     }
 
     //metodo que recibe si se aceptaron o no los permisos
@@ -107,9 +115,9 @@ public class enAccion extends AppCompatActivity implements LocationListener {
     }
     private void preguntar(String pregunta){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirmación")
+        builder.setTitle("Confirmation")
                 .setMessage(pregunta)
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         cronometro(tiempo, pregunta);
@@ -119,7 +127,6 @@ public class enAccion extends AppCompatActivity implements LocationListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         requestLocation();
-                        //metodo de enviar ubi al contacto
                     }
                 })
                 .show();
@@ -127,18 +134,18 @@ public class enAccion extends AppCompatActivity implements LocationListener {
 
     public void cronometro(int tiempo,String pregunta){
         countDownTimer = new CountDownTimer(tiempo*1000, 1000) {
-            // 60000 milisegundos (60 segundos), intervalo de 1000 milisegundos (1 segundo)
+            // milisegundos, intervalo de 1000 milisegundos (1 segundo)
 
             public void onTick(long millisUntilFinished) {
                 // Se llama cada segundo mientras el cronómetro está en marcha
                 long segundos = millisUntilFinished / 1000;
                 // Actualizar la interfaz de usuario con el tiempo restante
-                cronometro.setText("Tiempo restante: " + segundos + " segundos");
+                cronometro.setText("Time left: " + segundos + " seconds");
             }
 
             public void onFinish() {
                 // Se llama cuando el cronómetro llega a cero
-                cronometro.setText("¡Cronómetro finalizado!");
+                cronometro.setText("¡ Timer ended!");
                 preguntar(pregunta);
             }
         };
@@ -147,48 +154,6 @@ public class enAccion extends AppCompatActivity implements LocationListener {
 
     public void emergencia(View view){
         requestLocation();
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        Properties properties = new Properties();
-        properties.put("mail.smtp.host", "smtp.googlemail.com");
-        properties.put("mail.smtp.socketFactory.port", "465");
-        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.port", "465");
-
-        try{
-            session = Session.getDefaultInstance(properties, new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(correo, contra);
-                }
-            });
-
-            if(session != null){
-                LocationManager locationManager = (LocationManager) enAccion.this.getSystemService (Context.LOCATION_SERVICE);
-                LocationListener locationListener = new LocationListener() {
-                    public void onLocationChanged(@NonNull Location location) {
-                        ubicacion = (""+location.getLatitude()+" "+location.getLongitude());
-                    }
-                };
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(correo));
-                message.setSubject("EMERGENCIA: SU CONTACTO NO RESPONDE");
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("david-felipe-2000@hotmail.com"));
-                message.setContent("Hola, somos de la aplicación Ruhe, el envío de este mensaje se debe a que una persona que lo seleccionó a usted com contacto de emergencia, se encuentra en peligro, esta es la ubicación de la persona: "+ubicacion, "text/html; charset=utf-8");
-
-                Transport.send(message);
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-
         Toast.makeText(this,"Got it",Toast.LENGTH_SHORT).show();
-
-        //metodo de enviar ubi al contacto
-
     }
 }

@@ -22,6 +22,7 @@ public class Ingresado extends AppCompatActivity {
 
     FirebaseAuth auth;
     private ListView listView;
+    private int index;
     private ArrayList<String> rutasMostrar;
     private String opcion, encontrada;
 
@@ -30,6 +31,7 @@ public class Ingresado extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingresado);
+        Toast.makeText(Ingresado.this,"Remember to your contact to check their mail",Toast.LENGTH_SHORT).show();
 
         if(!Serial.cargarArchivo()){
             Serial.guardarArchivo(MainActivity.getRutas());
@@ -63,34 +65,35 @@ public class Ingresado extends AppCompatActivity {
 
     public void escogerRuta(View v){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Ingrese una ruta");
+        builder.setTitle("Choose your route.");
         // Inflar el diseño XML del EditText
         View view = getLayoutInflater().inflate(R.layout.dialog_layout, null);
         builder.setView(view);
-
         EditText editText = view.findViewById(R.id.editText);
 
         // Configurar botón "Aceptar"
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 opcion = editText.getText().toString();
-                // Guardar el valor ingresado en SharedPreferences
-                SharedPreferences preferences = getSharedPreferences("MyPrefs", Ingresado.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("userInput", opcion);
-                editor.apply();
+
                 // Aquí puedes hacer algo con el dato ingresado por el usuario
 
                 // Cerrar el cuadro de diálogo
-                for (Ruta rutaTraida: MainActivity.getRutas())
-                { if (rutaTraida.getNombreRuta().equals(opcion)){
-                    dialog.dismiss();
-                    Intent i = new Intent(Ingresado.this, enAccion.class);
-                    startActivity(i);
-                    encontrada="Se encontro la ruta.";
+                for (Ruta rutaTraida: MainActivity.getRutas()) {
+                    if (rutaTraida.getNombreRuta().equals(opcion)){
+                        // Guardar el valor ingresado en SharedPreferences
+                        SharedPreferences preferences = getSharedPreferences("MyPrefs", Ingresado.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        index=MainActivity.getRutas().indexOf(rutaTraida);
+                        editor.putInt("RutaIndex", index);
+                        dialog.dismiss();
+                        encontrada="We found your route";
+                        editor.apply();
+                        Intent i = new Intent(Ingresado.this, enAccion.class);
+                        startActivity(i);
                 }else{
-                    encontrada="No se encontro la ruta.";}
+                    encontrada="We did not find your route";}
                 }
                 Toast.makeText(Ingresado.this,encontrada,Toast.LENGTH_SHORT).show();
             }
@@ -108,13 +111,5 @@ public class Ingresado extends AppCompatActivity {
         // Mostrar el cuadro de diálogo
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    public String getOpcion() {
-        return opcion;
-    }
-
-    public void setOpcion(String opcion) {
-        this.opcion = opcion;
     }
 }

@@ -35,18 +35,17 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Ruta ruta1 = new Ruta("Restaurante", "4.6356580948948745, -74.08240211685772", "4.648896532622788, -74.07757715905059","Tas bien?","60","antrianaa@unal.edu.co");
-        Ruta ruta2 = new Ruta("Apto","4.6356580948948745, -74.08240211685772", "4.648716, -74.095209","Tas bien?","60","antrianaa@unal.edu.co");
-        Ruta ruta3 = new Ruta("Pareja","4.6356580948948745, -74.08240211685772", "4.702341, -74.143039 ","Tas bien?","60","antrianaa@unal.edu.co");
-        Ruta ruta4 = new Ruta("Ex pareja","4.6356580948948745, -74.08240211685772", "4.610145862143372, -74.0528045943292","Tas bien?","60","antrianaa@unal.edu.co");
-        Ruta ruta5 = new Ruta("Universidad","4.6356580948948745, -74.08240211685772", "4.597949468065427, -74.07606702229843","Tas bien?","60","antrianaa@unal.edu.co");
+        Ruta ruta1 = new Ruta("Restaurante", "4.6356580948948745, -74.08240211685772", "4.648896532622788, -74.07757715905059","tas bien?","30","antrianaa@unal.edu.co");
+        Ruta ruta2 = new Ruta("Apto","4.6356580948948745, -74.08240211685772", "4.648716, -74.095209","Tass bien?","20","antrianaa@unal.edu.co");
+        Ruta ruta3 = new Ruta("Pareja","4.6356580948948745, -74.08240211685772", "4.702341, -74.143039 ","Tas bienn?","10","antrianaa@unal.edu.co");
+        Ruta ruta4 = new Ruta("Ex pareja","4.6356580948948745, -74.08240211685772", "4.610145862143372, -74.0528045943292","Tas Bien?","15","antrianaa@unal.edu.co");
+        Ruta ruta5 = new Ruta("Universidad","4.6356580948948745, -74.08240211685772", "4.597949468065427, -74.07606702229843","Tas bien?","25","antrianaa@unal.edu.co");
 
         rutas.add(ruta1);
         rutas.add(ruta2);
         rutas.add(ruta4);
         rutas.add(ruta5);
         rutas.add(ruta3);
-
     }
 
     public static void añadirRuta(Ruta ruta){
@@ -63,10 +62,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    //ESTO SE VAAAAA
     public void irPruebaConAlertaConConfirmacion(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirmación")
-                .setMessage("Hay opciones que solo se visualizarán y se podrán usar si se ha iniciado sesión.\n¿Estás seguro de realizar esta acción?")
+        builder.setTitle("Confirmaction")
+                .setMessage("There are some options that you can only see\n¿Estás seguro de realizar esta acción?")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                     }
                 })
-                .setNegativeButton("Cancelar", null) // No realiza ninguna acción si el usuario presiona "Cancelar"
+                .setNegativeButton("Cancel", null) // No realiza ninguna acción si el usuario presiona "Cancelar"
                 .show();
     }
 

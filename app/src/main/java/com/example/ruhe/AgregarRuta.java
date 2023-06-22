@@ -66,7 +66,7 @@ public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback
     public void onMapLongClick(@NonNull LatLng latLng) {
         mMap.clear();
         LatLng destino = new LatLng(latLng.latitude, latLng.longitude);
-        mMap.addMarker(new MarkerOptions().position(destino).title("Destino"));
+        mMap.addMarker(new MarkerOptions().position(destino).title("Destination"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(destino));
 
         textDest.setText(String.valueOf(latLng.latitude+" "+latLng.longitude));
@@ -76,7 +76,7 @@ public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback
     //Metodo abrir mapa
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        Toast.makeText(this,"Centre el mapa con el icono superior derecho",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Use the icon on the right side of the map to center.",Toast.LENGTH_SHORT).show();
         mMap = googleMap;
         this.mMap.setOnMapClickListener(this);
         this.mMap.setOnMapLongClickListener(this);
@@ -91,8 +91,6 @@ public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback
                 usuario = new LatLng(location.getLatitude(), location.getLongitude());
                 //textUbi.setText(String.valueOf(usuario.latitude+" "+usuario.longitude));
                 userUbi = String.valueOf(usuario.latitude+" "+usuario.longitude);
-                //mMap.addMarker(new MarkerOptions().position(usuario).title("User"));
-                //mMap.moveCamera(CameraUpdateFactory.newLatLng(usuario));
             }
             public void onStatusChanges(String provider, int status, Bundle extras){}
             public void onProviderEnabled(String provider){}

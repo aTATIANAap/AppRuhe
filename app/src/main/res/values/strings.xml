@@ -5,7 +5,7 @@
     <string name="btn_registro">Registrarse</string>
     <string name="btn_prueba">Probar</string>
 
-    <string name="bienvenida">Bienvenid@</string>
+    <string name="bienvenida">Welcome</string>
     <string name="btn_escoger">Escoger ruta</string>
     <string name="btn_agregar">Agregar ruta</string>
     <string name="btn_cerrar">Cerrar sesión</string>

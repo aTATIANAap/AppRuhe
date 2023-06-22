@@ -44,7 +44,6 @@ public class registrarse extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser); aun no se ha creado este metodo
     }
 
     public void registrarUsuario(View view){
@@ -56,25 +55,18 @@ public class registrarse extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(getApplicationContext(),"Usuario creado.\n Bienvenid@ a la app que le permitirá llegar seguro a su destino.", Toast.LENGTH_SHORT).show();
-
-                                //Log.d(TAG, "createUserWithEmailAndPassword:success"); se puede omitir
+                                Toast.makeText(getApplicationContext(),"Welcome to the app that helps you to get safe home.", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                //updateUI(user); no es necesario
-
                                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                                 startActivity(i);
-
                             } else {
                                 // If sign in fails, display a message to the user.
-                                //Log.w(TAG, "createUserWithEmailAndPassword:failure", task.getException()); no es necesario
                                 Toast.makeText(getApplicationContext(),"Authentication failed.", Toast.LENGTH_SHORT).show();
-                                //updateUI(null); se puede omitir
                             }
                         }
                     });
         }else{
-            Toast.makeText(this,"Las contraseñas no coinciden",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Passwords don´t match.",Toast.LENGTH_SHORT).show();
         }
     }
 }
