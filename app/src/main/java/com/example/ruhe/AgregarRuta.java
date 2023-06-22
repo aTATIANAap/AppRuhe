@@ -104,7 +104,7 @@ public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback
     }
     public void crearRuta(Ruta ruta) {
         MainActivity.añadirRuta(ruta);
-        Toast.makeText(this,"Ruta Agregada",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Route added",Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, Ingresado.class);
         startActivity(i);
 
@@ -116,7 +116,7 @@ public class AgregarRuta extends AppCompatActivity implements OnMapReadyCallback
         String pregunta = String.valueOf(textPregunta.getText());
         String  tiempo = String.valueOf(textTiempo.getText());
         if (nombreRuta.equals("") || destino.equals("") || pregunta.equals("")|| contacto.equals("") || tiempo.equals("")) {
-            Toast.makeText(this,"Diligencie todos los campos del formulario",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Fill all the empty spaces",Toast.LENGTH_SHORT).show();
         } else {
             Ruta datosUsuario = new Ruta(nombreRuta, userUbi, destino, pregunta,tiempo,contacto);
             crearRuta(datosUsuario);

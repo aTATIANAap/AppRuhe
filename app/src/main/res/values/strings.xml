@@ -2,7 +2,7 @@
     <string name="app_name">Ruhe</string>
 
     <string name="btn_inicio">Login</string>
-    <string name="btn_registro">Register</string>
+    <string name="btn_registro">Sign up</string>
     <string name="btn_prueba">Try</string>
 
     <string name="bienvenida">Welcome</string>

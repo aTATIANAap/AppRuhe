@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
     //ESTO SE VAAAAA
     public void irPruebaConAlertaConConfirmacion(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirmaction")
-                .setMessage("There are some options that you can only see\n¿Estás seguro de realizar esta acción?")
+        builder.setTitle("Confirmation")
+                .setMessage("There are some options that you can only see\nAre you sure to make this action?")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -31,7 +31,7 @@ public class Ingresado extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingresado);
-        Toast.makeText(Ingresado.this,"Remember to your contact to check their mail",Toast.LENGTH_SHORT).show();
+        Toast.makeText(Ingresado.this,"Remember your contact to check their mail",Toast.LENGTH_SHORT).show();
 
         if(!Serial.cargarArchivo()){
             Serial.guardarArchivo(MainActivity.getRutas());
@@ -100,7 +100,7 @@ public class Ingresado extends AppCompatActivity {
         });
 
         // Configurar botón "Cancelar"
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Cerrar el cuadro de diálogo sin hacer ninguna acción adicional
